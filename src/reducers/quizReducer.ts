@@ -2,7 +2,7 @@ import State from '../types/State';
 import Action from '../types/Action';
 import { ACTION_TAGS } from '../actions/quizActions';
 
-export const quizStages = ['Form', 'Questions', 'Result'];
+export const quizStages = ['Home', 'Form', 'Questions', 'Result'];
 
 export const initialState = {
     quizPreferences: {
@@ -28,7 +28,8 @@ export const quizReducer = (state: State, action: Action): State => {
                 ...state,
                 questionsList: [],
                 currentQuestion: 0,
-                currentStage: quizStages[0],
+                currentStage: quizStages[1],
+                answers: [],
                 score: 0
             };
         case ACTION_TAGS.SET_LOADING:
@@ -44,8 +45,13 @@ export const quizReducer = (state: State, action: Action): State => {
                 loading: false,
                 questionsList: payload?.questionsList!,
                 currentQuestion: 0,
-                currentStage: quizStages[1],
-                answers: [],
+                currentStage: quizStages[2],
+                answers: payload!.questionsList!.map((question) => {
+                    return {
+                        correct: question.answerIndex,
+                        player: undefined
+                    };
+                }),
                 score: 0
             };
         case ACTION_TAGS.QUIT_QUIZ:
@@ -61,31 +67,30 @@ export const quizReducer = (state: State, action: Action): State => {
             return {
                 ...state,
                 score:
-                    state.questionsList[state.currentQuestion].options![payload?.lastAnswer!] ===
-                    state.questionsList[state.currentQuestion].correctAnswer
+                    state.answers[state.currentQuestion].correct === payload?.lastAnswer!
                         ? state.score + 1
                         : state.score,
                 quizOver: state.currentQuestion === state.quizPreferences.amount - 1 ? true : false,
                 currentQuestion: state.currentQuestion + 1,
                 currentStage:
                     state.currentQuestion === state.quizPreferences.amount - 1
-                        ? quizStages[2]
-                        : quizStages[1],
-                answers: [
-                    ...state.answers,
-                    {
-                        correct: state.questionsList[state.currentQuestion].options.indexOf(
-                            state.questionsList[state.currentQuestion].correctAnswer
-                        ),
-                        user: payload?.lastAnswer!
+                        ? quizStages[3]
+                        : quizStages[2],
+                answers: state.answers.map((answer, index) => {
+                    if (index === state.currentQuestion) {
+                        return {
+                            ...answer,
+                            player: payload?.lastAnswer!
+                        };
                     }
-                ]
+                    return answer;
+                })
             };
         case ACTION_TAGS.REVIEW_QUESTIONS:
             return {
                 ...state,
                 currentQuestion: 0,
-                currentStage: quizStages[1]
+                currentStage: quizStages[2]
             };
         case ACTION_TAGS.SHOW_PREVIOUS_QUESTION:
             return {
@@ -109,8 +114,13 @@ export const quizReducer = (state: State, action: Action): State => {
                 loading: false,
                 questionsList: payload?.questionsList!,
                 currentQuestion: 0,
-                currentStage: quizStages[1],
-                answers: [],
+                currentStage: quizStages[2],
+                answers: payload!.questionsList!.map((question) => {
+                    return {
+                        correct: question.answerIndex,
+                        player: undefined
+                    };
+                }),
                 score: 0
             };
         default:

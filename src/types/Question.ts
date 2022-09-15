@@ -3,7 +3,7 @@ type Question = {
     difficulty: string;
     title: string;
     options: string[];
-    correctAnswer: string;
+    answerIndex: number;
 };
 
 export default Question;

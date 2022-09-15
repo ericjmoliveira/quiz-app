@@ -3,7 +3,7 @@ import Question from './Question';
 
 type Answer = {
     correct: number;
-    user: number;
+    player: number | undefined;
 };
 
 type State = {
