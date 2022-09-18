@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <Container>
             <h1>Quiz App</h1>
-            <p>Test you knowledge with questions from several categories</p>
+            <p>Test your knowledge with questions from several categories</p>
             <button onClick={() => dispatch(actionsList.showQuizForm())}>Play now</button>
         </Container>
     );

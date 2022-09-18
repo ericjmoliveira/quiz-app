@@ -108,6 +108,9 @@ type OptionProps = {
 
 export const Option = styled.button<OptionProps>`
     height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: inherit;
     color: ${colors.primary};
     font-weight: 700;
