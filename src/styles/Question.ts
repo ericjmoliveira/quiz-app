@@ -74,7 +74,7 @@ export const Info = styled.div`
     }
 `;
 
-export const QuestionContainer = styled.div`
+export const Question = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -99,22 +99,33 @@ export const Options = styled.div`
     flex-direction: column;
     gap: 2rem 0;
     margin-top: 2rem;
+`;
 
-    button {
-        height: 50px;
-        background-color: inherit;
-        color: ${colors.primary};
-        font-weight: 700;
-        border: 2px solid ${colors.primary};
-        border-radius: 2.5rem;
-        padding: 1rem 2rem;
-        cursor: pointer;
-        transition: 0.25s;
+type OptionProps = {
+    quizOver: boolean;
+    optionColor: string | undefined;
+};
 
-        &:active {
-            background-color: ${colors.button};
-            color: ${colors.secondary};
-        }
+export const Option = styled.button<OptionProps>`
+    height: 50px;
+    background-color: inherit;
+    color: ${colors.primary};
+    font-weight: 700;
+    border: 2px solid ${colors.primary};
+    border-radius: 2.5rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+
+    &:active {
+        background-color: ${({ quizOver }) => (!quizOver ? colors.button : '')};
+        color: ${colors.secondary};
+    }
+
+    &:disabled {
+        background-color: ${({ optionColor }) => optionColor};
+        color: ${colors.secondary};
+        border: none;
+        cursor: auto;
     }
 `;
 

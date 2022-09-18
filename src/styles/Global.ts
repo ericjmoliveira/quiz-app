@@ -4,7 +4,9 @@ export const colors = {
     background: '#f5f7fb',
     primary: '#293264',
     secondary: '#fff',
-    button: '#4d59be'
+    button: '#4d59be',
+    correct: '#00e600',
+    incorrect: '#ff3333'
 };
 
 export const GlobalStyles = createGlobalStyle`

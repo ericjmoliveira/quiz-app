@@ -17,11 +17,15 @@ export default function Result() {
     return (
         <Container>
             <h2>
-                You got {state.score} of {state.quizPreferences.amount} questions right
+                {state.score === 0
+                    ? `You got none of the questions right...`
+                    : state.score === state.quizPreferences.amount
+                    ? 'You got all questions right, congratulations!'
+                    : `You got ${state.score} of ${state.quizPreferences.amount} questions right`}
             </h2>
             <QuizOptions>
                 <button onClick={() => dispatch(actionsList.reviewQuestions())}>
-                    Review questions
+                    Review the questions
                 </button>
                 <button onClick={() => dispatch(actionsList.showQuizForm())}>
                     Change quiz preferences
