@@ -2,6 +2,7 @@ import Home from './screens/Home';
 import Form from './screens/Form';
 import Question from './screens/Question';
 import Result from './screens/Result';
+import Spinner from './components/Spinner';
 import useQuiz from './hooks/useQuiz';
 import { quizStages } from './reducers/quizReducer';
 import { Container } from './styles/App';
@@ -12,7 +13,7 @@ export default function App() {
     return (
         <Container>
             {state.loading ? (
-                <h2>Loading...</h2>
+                <Spinner />
             ) : (
                 <>
                     {state.currentStage === quizStages[0] && <Home />}

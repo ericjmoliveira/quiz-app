@@ -18,7 +18,7 @@ export default function Result() {
         <Container>
             <h2>
                 {state.score === 0
-                    ? `You got none of the questions right...`
+                    ? 'You got none of the questions right...'
                     : state.score === state.quizPreferences.amount
                     ? 'You got all questions right, congratulations!'
                     : `You got ${state.score} of ${state.quizPreferences.amount} questions right`}
