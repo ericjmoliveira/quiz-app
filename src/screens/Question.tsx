@@ -1,6 +1,14 @@
 import useQuiz from '../hooks/useQuiz';
 import { actionsList } from '../actions/quizActions';
 import fetchQuestions from '../functions/fetchQuestions';
+import {
+    Container,
+    Controls,
+    Info,
+    QuestionContainer,
+    Options,
+    QuizOptions
+} from '../styles/Question';
 
 export default function Question() {
     const { state, dispatch } = useQuiz();
@@ -24,32 +32,36 @@ export default function Question() {
     };
 
     return (
-        <section>
+        <Container>
             <section>
                 {state.quizOver && (
-                    <section>
+                    <Controls>
                         <button onClick={() => dispatch(actionsList.showPreviousQuestion())}>
                             Previous
                         </button>
+                        {state.quizOver && (
+                            <h4>
+                                You got {state.score} of {state.quizPreferences.amount} questions
+                                right
+                            </h4>
+                        )}
                         <button onClick={() => dispatch(actionsList.showNextQuestion())}>
                             Next
                         </button>
-                        <h4>
-                            You got {state.score} of {state.quizPreferences.amount} questions right
-                        </h4>
-                    </section>
+                    </Controls>
                 )}
-                <div>{!state.quizOver && <button onClick={quitQuiz}>Quit quiz</button>}</div>
-                <div>
+                <Info>
+                    {!state.quizOver && <button onClick={quitQuiz}>Quit quiz</button>}
+
                     <h3>
                         Question {state.currentQuestion + 1} of {state.quizPreferences.amount}
                     </h3>
                     <p>Category: {state.questionsList[state.currentQuestion].category}</p>
-                </div>
+                </Info>
             </section>
-            <div>
+            <QuestionContainer>
                 <h3>{state.questionsList[state.currentQuestion].title}</h3>
-                <div>
+                <Options>
                     <button onClick={() => showNextQuestion(0)} disabled={state.quizOver}>
                         {state.questionsList[state.currentQuestion].options[0]}
                     </button>
@@ -62,16 +74,16 @@ export default function Question() {
                     <button onClick={() => showNextQuestion(3)} disabled={state.quizOver}>
                         {state.questionsList[state.currentQuestion].options[3]}
                     </button>
-                </div>
-            </div>
+                </Options>
+            </QuestionContainer>
             {state.quizOver && (
-                <div>
+                <QuizOptions>
                     <button onClick={() => dispatch(actionsList.showQuizForm())}>
                         Change quiz preferences
                     </button>
                     <button onClick={restartQuiz}>Play again</button>
-                </div>
+                </QuizOptions>
             )}
-        </section>
+        </Container>
     );
 }

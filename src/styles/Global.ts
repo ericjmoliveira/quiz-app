@@ -1,6 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyles = createGlobalStyle`
+export const colors = {
+    background: '#f5f7fb',
+    primary: '#293264',
+    secondary: '#fff',
+    button: '#4d59be'
+};
+
+export const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
         margin: 0;
@@ -8,5 +15,3 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Inter', sans-serif;
     }
 `;
-
-export default GlobalStyles;

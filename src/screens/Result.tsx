@@ -1,6 +1,7 @@
 import useQuiz from '../hooks/useQuiz';
 import fetchQuestions from '../functions/fetchQuestions';
 import { actionsList } from '../actions/quizActions';
+import { Container, QuizOptions } from '../styles/Result';
 
 export default function Result() {
     const { state, dispatch } = useQuiz();
@@ -14,17 +15,19 @@ export default function Result() {
     };
 
     return (
-        <section>
+        <Container>
             <h2>
                 You got {state.score} of {state.quizPreferences.amount} questions right
             </h2>
-            <button onClick={() => dispatch(actionsList.showQuizForm())}>
-                Change quiz preferences
-            </button>
-            <button onClick={() => dispatch(actionsList.reviewQuestions())}>
-                Review questions
-            </button>
-            <button onClick={restartQuiz}>Play again</button>
-        </section>
+            <QuizOptions>
+                <button onClick={() => dispatch(actionsList.reviewQuestions())}>
+                    Review questions
+                </button>
+                <button onClick={() => dispatch(actionsList.showQuizForm())}>
+                    Change quiz preferences
+                </button>
+                <button onClick={restartQuiz}>Play again</button>
+            </QuizOptions>
+        </Container>
     );
 }

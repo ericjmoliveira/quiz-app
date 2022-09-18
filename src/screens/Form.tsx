@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react';
 import useQuiz from '../hooks/useQuiz';
 import { actionsList } from '../actions/quizActions';
 import fetchQuestions from '../functions/fetchQuestions';
+import { Container, FormControl } from '../styles/Form';
 
 export default function Form() {
     const { state, dispatch } = useQuiz();
@@ -23,10 +24,10 @@ export default function Form() {
     };
 
     return (
-        <section>
+        <Container>
             <h2>Set the quiz preferences</h2>
             <form onSubmit={handleSubmit}>
-                <section>
+                <FormControl>
                     <label htmlFor="amount">Number of Questions:</label>
                     <input
                         type="number"
@@ -37,8 +38,8 @@ export default function Form() {
                         max="50"
                         required
                     />
-                </section>
-                <section>
+                </FormControl>
+                <FormControl>
                     <label htmlFor="category">Select Category:</label>
                     <select
                         id="category"
@@ -72,8 +73,8 @@ export default function Form() {
                         <option value="27">Animals</option>
                         <option value="28">Vehicles</option>
                     </select>
-                </section>
-                <section>
+                </FormControl>
+                <FormControl>
                     <label htmlFor="difficulty">Select Difficulty:</label>
                     <select
                         id="difficulty"
@@ -86,9 +87,9 @@ export default function Form() {
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                     </select>
-                </section>
+                </FormControl>
                 <button>Start quiz</button>
             </form>
-        </section>
+        </Container>
     );
 }

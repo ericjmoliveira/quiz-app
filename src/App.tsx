@@ -1,23 +1,26 @@
-import Home from './components/Home';
-import Form from './components/Form';
-import Question from './components/Question';
-import Result from './components/Result';
+import Home from './screens/Home';
+import Form from './screens/Form';
+import Question from './screens/Question';
+import Result from './screens/Result';
 import useQuiz from './hooks/useQuiz';
 import { quizStages } from './reducers/quizReducer';
+import { Container } from './styles/App';
 
 export default function App() {
     const { state } = useQuiz();
 
-    if (state.loading) {
-        return <h2>Loading questions...</h2>;
-    }
-
     return (
-        <main>
-            {state.currentStage === quizStages[0] && <Home />}
-            {state.currentStage === quizStages[1] && <Form />}
-            {state.currentStage === quizStages[2] && <Question />}
-            {state.currentStage === quizStages[3] && <Result />}
-        </main>
+        <Container>
+            {state.loading ? (
+                <h2>Loading...</h2>
+            ) : (
+                <>
+                    {state.currentStage === quizStages[0] && <Home />}
+                    {state.currentStage === quizStages[1] && <Form />}
+                    {state.currentStage === quizStages[2] && <Question />}
+                    {state.currentStage === quizStages[3] && <Result />}
+                </>
+            )}
+        </Container>
     );
 }
