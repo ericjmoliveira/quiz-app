@@ -36,7 +36,7 @@ export default function Question() {
 
         if (correct) return colors.correct;
         if (incorrect) return colors.incorrect;
-        if (notSelected) return colors.primary;
+        if (notSelected) return 'inherit';
     };
 
     return (
@@ -47,15 +47,6 @@ export default function Question() {
                         <button onClick={() => dispatch(actionsList.showPreviousQuestion())}>
                             Previous
                         </button>
-                        {state.quizOver && (
-                            <h4>
-                                {state.score === 0
-                                    ? 'You got none of the questions right...'
-                                    : state.score === state.quizPreferences.amount
-                                    ? 'You got all questions right, congratulations!'
-                                    : `You got ${state.score} of ${state.quizPreferences.amount} questions right`}
-                            </h4>
-                        )}
                         <button onClick={() => dispatch(actionsList.showNextQuestion())}>
                             Next
                         </button>
@@ -63,7 +54,15 @@ export default function Question() {
                 )}
                 <Styles.Info>
                     {!state.quizOver && <button onClick={quitQuiz}>Quit quiz</button>}
-
+                    {state.quizOver && (
+                        <h4>
+                            {state.score === 0
+                                ? 'You got none of the questions right...'
+                                : state.score === state.quizPreferences.amount
+                                ? 'You got all questions right, congratulations!'
+                                : `You got ${state.score} of ${state.quizPreferences.amount} questions right`}
+                        </h4>
+                    )}
                     <h3>
                         Question {state.currentQuestion + 1} of {state.quizPreferences.amount}
                     </h3>

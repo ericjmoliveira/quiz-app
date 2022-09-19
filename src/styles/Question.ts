@@ -16,12 +16,7 @@ export const Controls = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 1rem;
-
-    h4 {
-        text-align: center;
-        color: ${colors.primary};
-    }
+    margin-bottom: 2rem;
 
     button {
         background-color: ${colors.button};
@@ -29,7 +24,7 @@ export const Controls = styled.div`
         font-weight: 500;
         border: none;
         border-radius: 1.5rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         cursor: pointer;
         transition: 0.25s;
 
@@ -37,11 +32,21 @@ export const Controls = styled.div`
             background-color: ${colors.primary};
         }
     }
+
+    @media (min-width: 481px) {
+        margin-bottom: -2rem;
+    }
 `;
 
 export const Info = styled.div`
     display: flex;
     flex-direction: column;
+
+    h4 {
+        text-align: center;
+        color: ${colors.primary};
+        margin-bottom: 0.5rem;
+    }
 
     button {
         align-self: flex-start;
@@ -50,9 +55,9 @@ export const Info = styled.div`
         font-weight: 500;
         border: none;
         border-radius: 1.5rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         cursor: pointer;
-        margin-bottom: 1rem;
+        margin-bottom: 3rem;
         transition: 0.25s;
 
         &:hover {
@@ -97,7 +102,7 @@ export const Options = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem 0;
+    gap: 1rem 0;
     margin-top: 2rem;
 `;
 
@@ -126,31 +131,42 @@ export const Option = styled.button<OptionProps>`
 
     &:disabled {
         background-color: ${({ optionColor }) => optionColor};
-        color: ${colors.secondary};
-        border: none;
+        color: ${({ optionColor }) => optionColor !== 'inherit' && colors.secondary};
+        border: ${({ optionColor }) => optionColor !== 'inherit' && 'none'};
         cursor: auto;
     }
 `;
 
 export const QuizOptions = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin-top: 2.5rem;
+    justify-content: center;
+    margin-top: 3rem;
+    gap: 2rem;
 
     button {
-        align-self: flex-start;
+        width: 100%;
         background-color: ${colors.button};
         color: ${colors.secondary};
         font-weight: 500;
         border: none;
         border-radius: 1.5rem;
-        padding: 0.5rem 1rem;
+        padding: 1rem 2rem;
         cursor: pointer;
         transition: 0.25s;
 
         &:hover {
             background-color: ${colors.primary};
+        }
+    }
+
+    @media (min-width: 481px) {
+        flex-direction: row;
+        justify-content: space-between;
+
+        button {
+            width: 33%;
         }
     }
 `;
