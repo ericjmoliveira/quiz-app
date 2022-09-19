@@ -124,6 +124,7 @@ export const Option = styled.button<OptionProps>`
     border-radius: 2.5rem;
     padding: 1rem 2rem;
     cursor: pointer;
+    transition: 0.25s;
 
     &:active {
         background-color: ${({ quizOver }) => (!quizOver ? colors.button : '')};
@@ -134,6 +135,7 @@ export const Option = styled.button<OptionProps>`
         background-color: ${({ optionColor }) => optionColor};
         color: ${({ optionColor }) => optionColor !== 'inherit' && colors.secondary};
         border: ${({ optionColor }) => optionColor !== 'inherit' && 'none'};
+        transition: none;
         cursor: auto;
     }
 `;
