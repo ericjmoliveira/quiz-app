@@ -41,6 +41,7 @@ export const Controls = styled.div`
 export const Info = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     h4 {
         text-align: center;
@@ -166,7 +167,7 @@ export const QuizOptions = styled.div`
         justify-content: space-between;
 
         button {
-            width: 33%;
+            width: auto;
         }
     }
 `;
