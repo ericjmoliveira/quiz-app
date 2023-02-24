@@ -6,4 +6,4 @@ Main technologies tools used: React, TypeScript, Context API with hook useReduce
 
 More about the Open Trivia DB API: https://opentdb.com/api_config.php
 
-The quiz app online: https://otdbquiz.netlify.app
+The quiz app online: https://otdbquiz.vercel.app
